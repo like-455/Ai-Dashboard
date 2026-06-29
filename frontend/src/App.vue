@@ -177,7 +177,8 @@ const getCustomChart = (id: string) => customCharts.value.find(c => c.id === id)
 
 // Socket.io Realtime Data
 const socket = io('http://localhost:3000', {
-  reconnectionAttempts: 3,
+  reconnection: import.meta.env.DEV,
+  reconnectionAttempts: 5,
   timeout: 5000
 })
 const realtimeData = ref<any>(null)
