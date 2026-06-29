@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 font-sans antialiased transition-colors duration-300;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .dark body {
+    @apply bg-dark-900 text-slate-100;
+    background-image: radial-gradient(circle at 50% -20%, #1e293b 0%, #0f172a 60%);
+    background-attachment: fixed;
+  }
+
+  /* Dark theme scrollbar */
+  .dark ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .dark ::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.5);
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    background: rgba(96, 165, 250, 0.5);
+    border-radius: 3px;
+  }
+  .dark ::-webkit-scrollbar-thumb:hover {
+    background: rgba(96, 165, 250, 0.8);
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-gradient-to-br from-white/30 to-white/5 border border-white/60 rounded-2xl shadow-xl backdrop-blur-md;
+  }
+  
+  .dark .glass-panel {
+    @apply bg-gradient-to-br from-slate-800/40 to-slate-900/40 border border-slate-600/30 shadow-2xl backdrop-blur-xl relative overflow-hidden;
+  }
+
+  /* Sci-fi glow border effect for cards */
+  .dark .glass-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(0, 243, 255, 0.3), rgba(188, 19, 254, 0.1), transparent 50%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Cyber Loader Animation */
+  .cyber-loader {
+    width: 48px;
+    height: 48px;
+    border: 3px solid rgba(0, 243, 255, 0.2);
+    border-radius: 50%;
+    position: relative;
+    animation: spin 2s linear infinite;
+  }
+  .cyber-loader::before {
+    content: '';
+    position: absolute;
+    top: -3px; left: -3px; bottom: -3px; right: -3px;
+    border: 3px solid transparent;
+    border-top-color: #00f3ff;
+    border-radius: 50%;
+    animation: spin 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    filter: drop-shadow(0 0 8px #00f3ff);
+  }
+  .cyber-loader::after {
+    content: '';
+    position: absolute;
+    top: 6px; left: 6px; bottom: 6px; right: 6px;
+    border: 3px solid transparent;
+    border-bottom-color: #bc13fe;
+    border-radius: 50%;
+    animation: spin-reverse 1.5s linear infinite;
+  }
+  
+  @keyframes spin { 100% { transform: rotate(360deg); } }
+  @keyframes spin-reverse { 100% { transform: rotate(-360deg); } }
+}
